@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.valuereporter</groupId>
+  <artifactId>valuereporter-java-sdk</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <activityName>valuereporter-java-sdk</activityName>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <description>javaagent monitoring activities in your application. This information is forwarded to Valuereporter via http.</description>
+
+  <url>http://www.valuereporter.org</url>
+  <developers>
+    <developer>
+      <id>baardl</id>
+      <activityName>Bard Lind</activityName>
+      <email>bard.lind@gmail.com</email>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <organization>Cantara</organization>
+      <organizationUrl>http://wiki.cantara.no/</organizationUrl>
+    </developer>
+  </developers>
+
+  <parent>
+    <groupId>no.cantara.emi</groupId>
+    <artifactId>parent</artifactId>
+    <version>6</version>
+  </parent>
+
+  <scm>
+    <developerConnection>scm:git:ssh://git@github.com/cantara/Valuereporter-Java-SDK.git</developerConnection>
+    <connection>scm:git:https://github.com/cantara/Valuereporter-Java-SDK.git</connection>
+    <url>https://github.com/cantara/Valuereporter-Java-SDK</url>
+  </scm>
+
+  <repositories>
+
+    <!-- Needed for parent  -->
+    <repository>
+      <id>cantara-releases</id>
+      <activityName>Cantara Release Repository</activityName>
+      <url>http://mvnrepo.cantara.no/content/repositories/releases/</url>
+    </repository>
+  </repositories>
+  <distributionManagement>
+    <repository>
+      <id>cantara-releases</id>
+      <activityName>cantara-releases</activityName>
+      <url>https://mvnrepo.cantara.no/content/repositories/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>cantara-snapshots</id>
+      <activityName>cantara-releases</activityName>
+      <url>https://mvnrepo.cantara.no/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <dependencies>
+    <!--
+        TEST
+        -->
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>6.8.7</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>1.9.5</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.kevinsawicki</groupId>
+      <artifactId>http-request</artifactId>
+      <version>6.0</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
