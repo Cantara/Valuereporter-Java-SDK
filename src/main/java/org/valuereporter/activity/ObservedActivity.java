@@ -1,5 +1,8 @@
 package org.valuereporter.activity;
 
+import org.valuereporter.JsonSerializer;
+import org.valuereporter.util.JsonMapper;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +16,7 @@ import java.util.Map;
  *
  * @author <a href="bard.lind@gmail.com">Bard Lind</a>
  */
-public class ObservedActivity {
+public class ObservedActivity implements JsonSerializer {
     //The activityName is the identification of a method. Typically the activityName is the full activityName, including class, and package.
     private String activityName;
     private long startTime;
@@ -51,6 +54,14 @@ public class ObservedActivity {
                 ", startTime=" + startTime +
                 ", contextInfo=" + contextInfo +
                 '}';
+    }
+
+    @Override
+    public String toJson() {
+        String json = "{\"activityName\": \"" + activityName + "\"," +
+                "\"startTime\": " + startTime + "\"," +
+                "\"contextInfo\": " + JsonMapper.toJson(contextInfo) + "}";
+        return json;
     }
 
     public static class Builder {

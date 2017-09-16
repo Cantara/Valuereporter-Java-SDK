@@ -11,6 +11,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <slf4j.version>1.7.12</slf4j.version>
+    <hystrix-core.version>1.4.12</hystrix-core.version>
+    <rxjava_version_requested_by_hystrix-core>1.0.13</rxjava_version_requested_by_hystrix-core>
   </properties>
 
   <description>javaagent monitoring activities in your application. This information is forwarded to Valuereporter via http.</description>
@@ -66,6 +69,32 @@
   -->
 
   <dependencies>
+    <!-- Use Hystrix when dealing with connections -->
+    <dependency>
+      <groupId>com.netflix.hystrix</groupId>
+      <artifactId>hystrix-core</artifactId>
+      <version>${hystrix-core.version}</version>
+    </dependency>
+
+    <!--Error in dependency mgmt of Hystrix -->
+    <dependency>
+      <groupId>io.reactivex</groupId>
+      <artifactId>rxjava</artifactId>
+      <version>${rxjava_version_requested_by_hystrix-core}</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.kevinsawicki</groupId>
+      <artifactId>http-request</artifactId>
+      <version>6.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
     <!--
         TEST
         -->
@@ -82,11 +111,18 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.kevinsawicki</groupId>
-      <artifactId>http-request</artifactId>
-      <version>6.0</version>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.13</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.skyscreamer</groupId>
+      <artifactId>jsonassert</artifactId>
+      <version>1.5.0</version>
+      <scope>test</scope>
+    </dependency>
+
 
   </dependencies>
 
