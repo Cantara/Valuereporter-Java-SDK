@@ -40,9 +40,12 @@ public class ObservedMethod implements JsonSerializer{
                 '}';
     }
 
+    @Override
     public String toJson() {
-        //FIXME observed method not implemented yet
-        return null;
+        String json = "{\"name\": \"" + name + "\"," +
+                "\"startTime\": " + startTime + "," +
+                "\"endTime\": " + endTime + "}";
+        return json;
     }
 
 }
