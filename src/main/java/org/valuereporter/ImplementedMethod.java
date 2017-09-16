@@ -32,7 +32,7 @@ public class ImplementedMethod implements JsonSerializer {
 
     @Override
     public String toJson() {
-        //FIXME solve missing to Json
-        return null;
+        String json = "{\"name\": \"" + name + "\"}";
+        return json;
     }
 }
