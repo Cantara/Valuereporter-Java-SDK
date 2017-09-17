@@ -31,7 +31,7 @@ public class ImplementedMethodTest {
         String expected = "{\"name\": \"testMethod\"}";
         String json = method.toJson();
         log.trace("Json: {}", json);
-        JSONAssert.assertEquals(expected, json, false);
+        JSONAssert.assertEquals(expected, json, true);
     }
 
 }

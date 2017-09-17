@@ -59,7 +59,7 @@ public class ObservedActivity implements JsonSerializer {
     @Override
     public String toJson() {
         String json = "{\"activityName\": \"" + activityName + "\"," +
-                "\"startTime\": " + startTime + "\"," +
+                "\"startTime\": " + startTime + "," +
                 "\"contextInfo\": " + JsonMapper.toJson(contextInfo) + "}";
         return json;
     }

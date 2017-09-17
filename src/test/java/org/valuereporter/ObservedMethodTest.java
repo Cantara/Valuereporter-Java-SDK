@@ -40,7 +40,7 @@ public class ObservedMethodTest {
         String expected = "{\"name\": \"testObservation\",\"startTime\": 1505563307553,\"endTime\": 1505563307553}";
         String json = method.toJson();
         log.trace("Json: {}", json);
-        JSONAssert.assertEquals(expected, json, false);
+        JSONAssert.assertEquals(expected, json, true);
     }
 
 }
