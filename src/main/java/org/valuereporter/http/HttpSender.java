@@ -4,7 +4,7 @@ package org.valuereporter.http;
 import com.github.kevinsawicki.http.HttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.valuereporter.JsonSerializer;
+import org.valuereporter.Observation;
 import org.valuereporter.util.JsonMapper;
 
 import java.util.List;
@@ -25,14 +25,14 @@ public class HttpSender implements Runnable {
 
     private final String observedMethodsJson;
 
-    public HttpSender(final String reporterHost, final String reporterPort, final String prefix, final List<JsonSerializer> observedMethods) {
+    public HttpSender(final String reporterHost, final String reporterPort, final String prefix, final List<Observation> observedMethods) {
         observedMethodsJson = buildJson(observedMethods);
         this.reporterHost = reporterHost;
         this.reporterPort = reporterPort;
         this.prefix = prefix;
     }
 
-    private String buildJson(List<JsonSerializer> observedMethods)  {
+    private String buildJson(List<Observation> observedMethods)  {
         String json = JsonMapper.toJson(observedMethods);
 
         return json;

@@ -7,7 +7,7 @@ package org.valuereporter;
  *
  * @author <a href="bard.lind@gmail.com">Bard Lind</a>
  */
-public class ObservedMethod implements JsonSerializer{
+public class ObservedMethod implements Observation{
     //The name is the identification of a method. Typically the name is the full name, including class, and package.
     private final String name;
     private final long startTime;

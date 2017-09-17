@@ -1,6 +1,6 @@
 package org.valuereporter.util;
 
-import org.valuereporter.JsonSerializer;
+import org.valuereporter.Observation;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  */
 public class JsonMapper {
 
-    public static String toJson(List<? extends JsonSerializer> observations) {
+    public static String toJson(List<? extends Observation> observations) {
         String result = "";
         if (observations != null && observations.size() > 0) {
             result = "[";

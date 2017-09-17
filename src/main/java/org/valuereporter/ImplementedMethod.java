@@ -7,7 +7,7 @@ package org.valuereporter;
  *
  * @author <a href="bard.lind@gmail.com">Bard Lind</a>
  */
-public class ImplementedMethod implements JsonSerializer {
+public class ImplementedMethod implements Observation {
     private final String name;
 
     public ImplementedMethod(String name) {

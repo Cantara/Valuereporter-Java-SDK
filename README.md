@@ -1,2 +1,7 @@
 # Valuereporter-Java-SDK
-Functions used to send observations and activities to Valuereporter
+
+Responsibillity: To send observations and activities to Valuereporter.
+
+## Getting Started
+
+TODO
