@@ -5,6 +5,7 @@ import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import org.slf4j.Logger;
 import org.valuereporter.ObservedMethod;
+import org.valuereporter.ValuereporterException;
 import org.valuereporter.util.JsonMapper;
 
 import java.util.List;
@@ -23,11 +24,23 @@ public class CommandSendObservations extends HystrixCommand<String>  {
     private final String reporterPort;
     private final String observedMethodsJson;
 
+    /**
+     *
+     * @param reporterHost hostname
+     * @param reporterPort port
+     * @param serviceName common name of the Microservice, or Application
+     * @param observedMethods List of observations. May not be null, nor empty.
+     * @throws ValuereporterException When observedMethods is null or empty list
+     */
     public CommandSendObservations(final String reporterHost, final String reporterPort, final String serviceName, final List<ObservedMethod> observedMethods) {
         super(HystrixCommandGroupKey.Factory.asKey("ValueReporterAgent-group"));
+        if (observedMethods == null || observedMethods.size() == 0) {
+            throw new ValuereporterException("ObservedMethods can not be Null nor Empty.");
+        }
         if (observedMethods != null) {
             log.trace("Build observedMethods json from {} methods.", observedMethods.size());
         }
+
         observedMethodsJson = buildJson(observedMethods);
         this.reporterHost = reporterHost;
         this.reporterPort = reporterPort;
