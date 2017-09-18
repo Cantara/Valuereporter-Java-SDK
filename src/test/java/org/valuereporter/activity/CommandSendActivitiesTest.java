@@ -58,9 +58,9 @@ public class CommandSendActivitiesTest {
         observedActivities.add(userLogon);
         String host = "localhost";
         String port = "4901";
-        String prefix = "initial";
+        String serviceName = "initial";
         //Send
-        CommandSendActivities sendActivities = new CommandSendActivities(host,port,prefix,observedActivities);
+        CommandSendActivities sendActivities = new CommandSendActivities(host,port,serviceName,observedActivities);
         //Validate
         String observedActivitiesJson = sendActivities.getObservedActivitiesJson();
         log.info("Received {}", observedActivitiesJson);

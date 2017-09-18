@@ -15,13 +15,13 @@ public class ManualSenderTest {
     private static final Logger log = getLogger(ManualSenderTest.class);
     private static String host = "localhost";
     private static String port = "4901";
-    private static String prefix = "manual-test";
+    private static String serviceName = "manual-test";
 
     //Manual testing
     public static void main(String[] args) {
 
         List<ObservedMethod> observedMethods = new ArrayList<>();
-        CommandSender commandSender = new CommandSender(host, port,prefix, observedMethods);
+        CommandSender commandSender = new CommandSender(host, port, serviceName, observedMethods);
 
     }
 

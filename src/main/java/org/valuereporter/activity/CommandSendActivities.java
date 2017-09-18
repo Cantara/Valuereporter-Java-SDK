@@ -15,23 +15,19 @@ public class CommandSendActivities extends HystrixCommand<String>  {
 
     private static final Logger log = getLogger(CommandSendActivities.class);
 
-    private final String prefix;
-    private final List<ObservedActivity> observedActivities;
+    private final String serviceName;
     private final String reporterHost;
     private final String reporterPort;
-    private static final int STATUS_OK = 200;
-    private static final int STATUS_FORBIDDEN = 403;
     private final String observedActivitiesJson;
     private final int no_of_activities;
 
-    public CommandSendActivities(final String reporterHost, final String reporterPort, final String prefix, final List<ObservedActivity> observedActivities) {
+    public CommandSendActivities(final String reporterHost, final String reporterPort, final String serviceName, final List<ObservedActivity> observedActivities) {
         super(HystrixCommandGroupKey.Factory.asKey("ValueReporterAgent-group"));
         observedActivitiesJson = buildJson(observedActivities);
         no_of_activities = observedActivities.size();
         this.reporterHost = reporterHost;
         this.reporterPort = reporterPort;
-        this.prefix = prefix;
-        this.observedActivities = observedActivities;
+        this.serviceName = serviceName;
     }
 
     protected String buildJson(List<ObservedActivity> observedActivities)  {
@@ -42,16 +38,8 @@ public class CommandSendActivities extends HystrixCommand<String>  {
 
     @Override
     protected String run() {
-//        Client client = ClientBuilder.newClient();
-//        String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe/activities";
-//        log.info("Connection to ValueReporter on {}" , observationUrl);
-//        final WebTarget observationTarget = client.target(observationUrl);
-//        WebTarget webResource = observationTarget.path(prefix);
-//        log.trace("Forwarding observedActivities as Json \n{}", observedActivitiesJson);
-//        Response response = webResource.request(MediaType.APPLICATION_JSON).post(Entity.entity(observedActivitiesJson, MediaType.APPLICATION_JSON));
-//        int statusCode = statusCode;
 
-        String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe" + "/activities/" + prefix;
+        String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe" + "/activities/" + serviceName;
         log.info("Connection to ValueReporter on {} num of activities: {}" , observationUrl,no_of_activities);
         HttpRequest request = HttpRequest.post(observationUrl ).acceptJson().contentType(HttpSender.APPLICATION_JSON).send(observedActivitiesJson);
         int statusCode = request.code();

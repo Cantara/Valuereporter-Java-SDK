@@ -38,17 +38,6 @@ public class HttpImplementedMethodSender implements Runnable {
 
     @Override
     public void run() {
-//        Client client = ClientBuilder.newClient();
-//        String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe";
-//        log.info("Connection to ValueReporter on {}" , observationUrl);
-//        final WebTarget observationTarget = client.target(observationUrl);
-//        WebTarget webResource = findWebResourceByPrefix(serviceName);
-//        WebTarget webResource = observationTarget.path("implementedmethods").path(serviceName);
-//        String observedMethodsJson = mapper.writeValueAsString(observedMethods);
-//        log.trace("Forwarding implementedMethods as Json \n{}", implementedMethodsAsJson);
-//        Response response = webResource.request(MediaType.APPLICATION_JSON).post(Entity.entity(implementedMethodsAsJson, MediaType.APPLICATION_JSON));
-//        int statusCode = statusCode;
-
         String implMethodUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe" + "/implementedmethods/" + serviceName;
         log.info("Connection to ValueReporter on {}" , implMethodUrl);
         log.trace("Forwarding implementedMethods as Json \n{}", implementedMethodsAsJson);

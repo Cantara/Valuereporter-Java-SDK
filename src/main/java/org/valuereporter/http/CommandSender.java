@@ -12,22 +12,22 @@ import static org.slf4j.LoggerFactory.getLogger;
  */
 public class CommandSender implements Runnable {
     private static final Logger log = getLogger(CommandSender.class);
-    private final String prefix;
+    private final String serviceName;
     private final List<ObservedMethod> observedMethods;
     private final String reporterHost;
     private final String reporterPort;
 
-    public CommandSender(final String reporterHost, final String reporterPort, final String prefix, final List<ObservedMethod> observedMethods) {
+    public CommandSender(final String reporterHost, final String reporterPort, final String serviceName, final List<ObservedMethod> observedMethods) {
         this.reporterHost = reporterHost;
         this.reporterPort = reporterPort;
-        this.prefix = prefix;
+        this.serviceName = serviceName;
         this.observedMethods = observedMethods;
     }
 
     @Override
     public void run() {
 
-        String commandStatus = new CommandSendObservations(reporterHost,reporterPort,prefix,observedMethods).execute();
+        String commandStatus = new CommandSendObservations(reporterHost,reporterPort, serviceName,observedMethods).execute();
         log.trace("Ran CommandSendObservations. Status {}", commandStatus);
 
     }

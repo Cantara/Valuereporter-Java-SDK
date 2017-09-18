@@ -19,17 +19,17 @@ public class HttpSender implements Runnable {
     public static final int STATUS_FORBIDDEN = 403;
 
 
-    private final String prefix;
+    private final String serviceName;
     private final String reporterHost;
     private final String reporterPort;
 
     private final String observedMethodsJson;
 
-    public HttpSender(final String reporterHost, final String reporterPort, final String prefix, final List<Observation> observedMethods) {
+    public HttpSender(final String reporterHost, final String reporterPort, final String serviceName, final List<Observation> observedMethods) {
         observedMethodsJson = buildJson(observedMethods);
         this.reporterHost = reporterHost;
         this.reporterPort = reporterPort;
-        this.prefix = prefix;
+        this.serviceName = serviceName;
     }
 
     private String buildJson(List<Observation> observedMethods)  {
@@ -38,18 +38,18 @@ public class HttpSender implements Runnable {
         return json;
     }
 
-    //public void forwardObservations(String prefix, List<ObservedMethod> observedMethods) {
+    //public void forwardObservations(String serviceName, List<ObservedMethod> observedMethods) {
     public void run() {
 //        Client client = ClientBuilder.newClient();
 //        String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe";
 //        log.info("Connection to ValueReporter on {}" , observationUrl);
 //        final WebTarget observationTarget = client.target(observationUrl);
-//        WebTarget webResource = observationTarget.path("observedmethods").path(prefix);
+//        WebTarget webResource = observationTarget.path("observedmethods").path(serviceName);
 //        log.trace("Forwarding observedMethods as Json \n{}", observedMethodsJson);
 //        Response response = webResource.request(MediaType.APPLICATION_JSON).post(Entity.entity(observedMethodsJson, MediaType.APPLICATION_JSON));
 //        int statusCode = statusCode;
 
-        String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe" + "/observedmethods/" + prefix;
+        String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe" + "/observedmethods/" + serviceName;
         log.info("Connection to ValueReporter on {}" , observationUrl);
         log.trace("Forwarding observedMethods as Json \n{}", observedMethodsJson);
         HttpRequest request = HttpRequest.post(observationUrl ).acceptJson().contentType(HttpSender.APPLICATION_JSON).send(observedMethodsJson);

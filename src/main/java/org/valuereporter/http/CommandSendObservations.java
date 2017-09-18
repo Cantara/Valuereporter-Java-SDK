@@ -18,13 +18,12 @@ public class CommandSendObservations extends HystrixCommand<String>  {
 
     private static final Logger log = getLogger(CommandSendObservations.class);
 
-    private final String prefix;
-    private final List<ObservedMethod> observedMethods;
+    private final String serviceName;
     private final String reporterHost;
     private final String reporterPort;
     private final String observedMethodsJson;
 
-    public CommandSendObservations(final String reporterHost, final String reporterPort, final String prefix, final List<ObservedMethod> observedMethods) {
+    public CommandSendObservations(final String reporterHost, final String reporterPort, final String serviceName, final List<ObservedMethod> observedMethods) {
         super(HystrixCommandGroupKey.Factory.asKey("ValueReporterAgent-group"));
         if (observedMethods != null) {
             log.trace("Build observedMethods json from {} methods.", observedMethods.size());
@@ -32,8 +31,7 @@ public class CommandSendObservations extends HystrixCommand<String>  {
         observedMethodsJson = buildJson(observedMethods);
         this.reporterHost = reporterHost;
         this.reporterPort = reporterPort;
-        this.prefix = prefix;
-        this.observedMethods = observedMethods;
+        this.serviceName = serviceName;
     }
 
     protected String buildJson(List<ObservedMethod> observedMethods)  {
@@ -44,25 +42,8 @@ public class CommandSendObservations extends HystrixCommand<String>  {
 
     @Override
     protected String run() {
-//        Client client = ClientBuilder.newClient();
-//        String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe";
-//        log.info("Connection to ValueReporter on {}" , observationUrl);
-//        final WebTarget observationTarget = client.target(observationUrl);
-//        WebTarget webResource = observationTarget.path("observedmethods").path(prefix);
-//        log.trace("Forwarding observedMethods as Json \n{}", observedMethodsJson);
-        //        WebTarget webResource = observationTarget.path("observedmethods").path(prefix);
-//        log.trace("Forwarding observedMethods as Json \n{}", observedMethodsJson);
 
-//        Response response = webResource.request(MediaType.APPLICATION_JSON).post(Entity.entity(observedMethodsJson, MediaType.APPLICATION_JSON));
-
-
-//        Response response = webResource.request(MediaType.APPLICATION_JSON).post(Entity.entity(observedMethodsJson, MediaType.APPLICATION_JSON));
-//        int statusCode = response.getStatus();
-//        String reporterHost = "localhost";
-//        String reporterPort = "4901";
-//        String prefix = "All";
-//        String observedMethodsJson = "[]";
-        String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe" + "/observedmethods/" + prefix;
+        String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe" + "/observedmethods/" + serviceName;
         log.info("Connection to ValueReporter on {}." , observationUrl);
         log.trace("Forward observed methods to {}. Payload [{}].", observationUrl, observedMethodsJson);
         HttpRequest request = HttpRequest.post(observationUrl ).acceptJson().contentType(HttpSender.APPLICATION_JSON).send(observedMethodsJson);

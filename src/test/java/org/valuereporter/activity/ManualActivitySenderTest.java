@@ -15,15 +15,15 @@ public class ManualActivitySenderTest {
 
     private static String host = "localhost";
     private static String port = "4901";
-    private static String prefix = "manual-test";
+    private static String serviceName = "manual-test";
 
     //Manual testing
     public static void main(String[] args) {
 
         List<ObservedActivity> observedActivities = new ArrayList<>();
-        CommandActivitySender commandSender = new CommandActivitySender(host, port,prefix, observedActivities);
-        log.info("Forward {} activities to http://{}:{} with prefix {}. \n" +
-                "\tTo view visit http://{}:{}/reporter/...TODO", observedActivities.size(), host, port, prefix,host,port);//TODO correct url
+        CommandActivitySender commandSender = new CommandActivitySender(host, port, serviceName, observedActivities);
+        log.info("Forward {} activities to http://{}:{} with serviceName {}. \n" +
+                "\tTo view visit http://{}:{}/reporter/...TODO", observedActivities.size(), host, port, serviceName,host,port);//TODO correct url
         commandSender.run();
         log.info("Done");
 
