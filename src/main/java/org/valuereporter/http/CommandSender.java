@@ -3,7 +3,9 @@ package org.valuereporter.http;
 import org.slf4j.Logger;
 import org.valuereporter.ObservedMethod;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -21,12 +23,24 @@ public class CommandSender implements Runnable {
         this.reporterHost = reporterHost;
         this.reporterPort = reporterPort;
         this.serviceName = serviceName;
-        this.observedMethods = observedMethods;
+
+        if (observedMethods != null) {
+            log.trace("Initiate CommandSender. Number of observations {}", observedMethods.size());
+            this.observedMethods = observedMethods.stream().collect(Collectors.toList());
+        } else {
+            log.trace("Initiate CommandSender. No observations to send.");
+            this.observedMethods = new ArrayList<>();
+        }
     }
 
     @Override
     public void run() {
 
+        if (observedMethods != null) {
+            log.trace("Run CommandSender. Number of observations {}", observedMethods.size());
+        } else {
+            log.trace("Run CommandSender. No observations to send.");
+        }
         String commandStatus = new CommandSendObservations(reporterHost,reporterPort, serviceName,observedMethods).execute();
         log.trace("Ran CommandSendObservations. Status {}", commandStatus);
 
