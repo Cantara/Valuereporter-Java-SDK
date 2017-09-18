@@ -26,6 +26,9 @@ public class CommandSendObservations extends HystrixCommand<String>  {
 
     public CommandSendObservations(final String reporterHost, final String reporterPort, final String prefix, final List<ObservedMethod> observedMethods) {
         super(HystrixCommandGroupKey.Factory.asKey("ValueReporterAgent-group"));
+        if (observedMethods != null) {
+            log.trace("Build observedMethods json from {} methods.", observedMethods.size());
+        }
         observedMethodsJson = buildJson(observedMethods);
         this.reporterHost = reporterHost;
         this.reporterPort = reporterPort;
@@ -33,9 +36,8 @@ public class CommandSendObservations extends HystrixCommand<String>  {
         this.observedMethods = observedMethods;
     }
 
-    private String buildJson(List<ObservedMethod> observedMethods)  {
-        String json = "";
-        JsonMapper.toJson(observedMethods);
+    protected String buildJson(List<ObservedMethod> observedMethods)  {
+        String json = JsonMapper.toJson(observedMethods);
 
         return json;
     }
@@ -61,7 +63,8 @@ public class CommandSendObservations extends HystrixCommand<String>  {
 //        String prefix = "All";
 //        String observedMethodsJson = "[]";
         String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe" + "/observedmethods/" + prefix;
-        log.info("Connection to ValueReporter on {}" , observationUrl);
+        log.info("Connection to ValueReporter on {}." , observationUrl);
+        log.trace("Forward observed methods to {}. Payload [{}].", observationUrl, observedMethodsJson);
         HttpRequest request = HttpRequest.post(observationUrl ).acceptJson().contentType(HttpSender.APPLICATION_JSON).send(observedMethodsJson);
         int statusCode = request.code();
         String responseBody = request.body();

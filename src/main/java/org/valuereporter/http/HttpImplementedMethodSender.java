@@ -15,16 +15,16 @@ public class HttpImplementedMethodSender implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(HttpImplementedMethodSender.class);
     private final String reporterHost;
     private final String reporterPort;
-    private final String prefix;
+    private final String serviceName;
     private static final int STATUS_BAD_REQUEST = 400; //Response.Status.BAD_REQUEST.getStatusCode();
     private static final int STATUS_OK = 200; //Response.Status.OK.getStatusCode();
     private static final int STATUS_FORBIDDEN = 403;
     private String implementedMethodsAsJson;
 
-    public HttpImplementedMethodSender(String reporterHost, String reporterPort, String prefix,List<ImplementedMethod> implementedMethods) {
+    public HttpImplementedMethodSender(String reporterHost, String reporterPort, String serviceName, List<ImplementedMethod> implementedMethods) {
         this.reporterHost = reporterHost;
         this.reporterPort = reporterPort;
-        this.prefix = prefix;
+        this.serviceName = serviceName;
         this.implementedMethodsAsJson = buildJson(implementedMethods);
     }
 
@@ -42,14 +42,14 @@ public class HttpImplementedMethodSender implements Runnable {
 //        String observationUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe";
 //        log.info("Connection to ValueReporter on {}" , observationUrl);
 //        final WebTarget observationTarget = client.target(observationUrl);
-//        WebTarget webResource = findWebResourceByPrefix(prefix);
-//        WebTarget webResource = observationTarget.path("implementedmethods").path(prefix);
+//        WebTarget webResource = findWebResourceByPrefix(serviceName);
+//        WebTarget webResource = observationTarget.path("implementedmethods").path(serviceName);
 //        String observedMethodsJson = mapper.writeValueAsString(observedMethods);
 //        log.trace("Forwarding implementedMethods as Json \n{}", implementedMethodsAsJson);
 //        Response response = webResource.request(MediaType.APPLICATION_JSON).post(Entity.entity(implementedMethodsAsJson, MediaType.APPLICATION_JSON));
 //        int statusCode = statusCode;
 
-        String implMethodUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe" + "/implementedmethods/" + prefix;
+        String implMethodUrl = "http://"+reporterHost + ":" + reporterPort +"/reporter/observe" + "/implementedmethods/" + serviceName;
         log.info("Connection to ValueReporter on {}" , implMethodUrl);
         log.trace("Forwarding implementedMethods as Json \n{}", implementedMethodsAsJson);
         HttpRequest request = HttpRequest.post(implMethodUrl ).acceptJson().contentType(HttpSender.APPLICATION_JSON).send(implementedMethodsAsJson);
