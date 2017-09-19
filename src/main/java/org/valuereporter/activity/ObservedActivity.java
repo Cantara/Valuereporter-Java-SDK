@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * This class will represent an activity. This activity will have some main characteristics:
  * - activityName: Unique identifier for a type of activity
- * - startTime: When the activity occured
+ * - startTime: When the activity occurred
  * - contextInfo: map of parameters, aka payload
  *
  * These methods will be forwarded to the Valuereporter analyzer, as an activity that has occured.
@@ -32,6 +32,10 @@ public class ObservedActivity implements Observation {
 
     public String getActivityName() {
         return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 
     @Override
