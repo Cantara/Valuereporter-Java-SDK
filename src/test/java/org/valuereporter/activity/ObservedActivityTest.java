@@ -24,6 +24,7 @@ public class ObservedActivityTest {
         timestamp = System.currentTimeMillis();
         observedActivity = new ObservedActivity(activityName, timestamp);
         observedActivity.addContextInfo("userid", new String("me"));
+        observedActivity.setServiceName("service1");
 
     }
 
@@ -37,7 +38,7 @@ public class ObservedActivityTest {
 
     @Test
     public void testToJson() throws Exception {
-        String expectedJson = "{\"activityName\": \"testname\",\"startTime\": " + timestamp +",\"contextInfo\": {\"userid\": \"me\"}}";
+        String expectedJson = "{\"serviceName\":\"service1\",\"activityName\": \"testname\",\"startTime\": " + timestamp +",\"contextInfo\": {\"userid\": \"me\"}}";
         String actualStr = observedActivity.toJson();
         JSONAssert.assertEquals(expectedJson, actualStr,true);
 

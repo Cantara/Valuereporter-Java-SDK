@@ -18,6 +18,7 @@ import java.util.Map;
  */
 public class ObservedActivity implements Observation {
     //The activityName is the identification of a method. Typically the activityName is the full activityName, including class, and package.
+    private String serviceName = "";
     private String activityName;
     private long startTime;
     private Map<String,Object> contextInfo = new HashMap<>();
@@ -25,9 +26,24 @@ public class ObservedActivity implements Observation {
     private ObservedActivity() {
 
     }
+
+    public ObservedActivity(String activityName) {
+        this(activityName, System.currentTimeMillis());
+    }
+
     public ObservedActivity(String activityName, long startTime) {
         this.activityName = activityName;
         this.startTime = startTime;
+    }
+
+    public ObservedActivity(String activityName, long startTime, Map<String, Object> contextInfo) {
+        this(activityName, startTime);
+        this.contextInfo = contextInfo;
+    }
+
+    public ObservedActivity(String serviceName, String activityName, long startTime, Map<String, Object> contextInfo) {
+        this(activityName, startTime, contextInfo);
+        this.serviceName = serviceName;
     }
 
     public String getActivityName() {
@@ -36,6 +52,14 @@ public class ObservedActivity implements Observation {
 
     public void setActivityName(String activityName) {
         this.activityName = activityName;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
     @Override
@@ -61,19 +85,42 @@ public class ObservedActivity implements Observation {
        contextInfo.put(key,info);
     }
 
+    public Object getContextInfoValue(String key) {
+        Object value = null;
+        if (contextInfo != null && contextInfo.containsKey(key)) {
+            value = contextInfo.get(key);
+        }
+        return value;
+    }
+
     /**
-     * @Deprecated Please use addContextInfo(key, info)
-     * @param key name of info element.
-     * @param info name of info element.
+     * @deprecated Please use @see {@link org.valuereporter.activity.ObservedActivity#addContextInfo(String, Object)}
      */
+    @Deprecated
     public void put(String key, Object info) {
         addContextInfo(key,info);
+    }
+
+    /**
+     * @deprecated Please use @see {@link org.valuereporter.activity.ObservedActivity#getContextInfoValue(String)}
+     */
+    @Deprecated
+    public Object getValue(String key) {
+        return getContextInfoValue(key);
+    }
+
+    /**
+     * @deprecated Please use @see {@link org.valuereporter.activity.ObservedActivity#getContextInfo()}
+     */
+    public Map<String, Object> getData() {
+        return getContextInfo();
     }
 
     @Override
     public String toString() {
         return "ObservedActivity{" +
-                "activityName='" + activityName + '\'' +
+                "serviceName='" + serviceName + '\'' +
+                ", activityName='" + activityName + '\'' +
                 ", startTime=" + startTime +
                 ", contextInfo=" + contextInfo +
                 '}';
@@ -81,7 +128,8 @@ public class ObservedActivity implements Observation {
 
     @Override
     public String toJson() {
-        String json = "{\"activityName\": \"" + activityName + "\"," +
+        String json = "{\"serviceName\": \"" + serviceName + "\"," +
+                "\"activityName\": " + activityName + "," +
                 "\"startTime\": " + startTime + "," +
                 "\"contextInfo\": " + JsonMapper.toJson(contextInfo) + "}";
         return json;

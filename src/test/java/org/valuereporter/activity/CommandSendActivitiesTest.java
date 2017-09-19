@@ -34,6 +34,7 @@ public class CommandSendActivitiesTest {
         List<ObservedActivity> observedActivities = new ArrayList();
         ObservedActivity observedActivity = new ObservedActivity("logon",1456904461955L);
         observedActivity.addContextInfo("userId", "me");
+        observedActivity.setServiceName("service1");
         observedActivities.add(observedActivity);
         sendActivities = new CommandSendActivities(null,null,"test",observedActivities);
         String observedActivitiesJson = sendActivities.getObservedActivitiesJson();
@@ -68,5 +69,5 @@ public class CommandSendActivitiesTest {
 
     }
 
-    private static final String expectedSingle = "[{\"activityName\":\"logon\",\"startTime\":1456904461955,\"contextInfo\":{\"userId\":\"me\"}}]";
+    private static final String expectedSingle = "[{\"serviceName\":\"service1\",\"activityName\":\"logon\",\"startTime\":1456904461955,\"contextInfo\":{\"userId\":\"me\"}}]";
 }
