@@ -48,8 +48,22 @@ public class ObservedActivity implements Observation {
         return contextInfo;
     }
 
+    /**
+     * Add extra info describing the context this activity was used in.
+     * @param key name of info element.
+     * @param info value of info element.
+     */
     public void addContextInfo(String key, Object info){
        contextInfo.put(key,info);
+    }
+
+    /**
+     * @Deprecated Please use addContextInfo(key, info)
+     * @param key name of info element.
+     * @param info name of info element.
+     */
+    public void put(String key, Object info) {
+        addContextInfo(key,info);
     }
 
     @Override
