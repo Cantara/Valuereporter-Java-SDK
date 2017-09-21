@@ -129,7 +129,7 @@ public class ObservedActivity implements Observation {
     @Override
     public String toJson() {
         String json = "{\"serviceName\": \"" + serviceName + "\"," +
-                "\"activityName\": " + activityName + "," +
+                "\"activityName\": \"" + activityName + "\"," +
                 "\"startTime\": " + startTime + "," +
                 "\"contextInfo\": " + JsonMapper.toJson(contextInfo) + "}";
         return json;
