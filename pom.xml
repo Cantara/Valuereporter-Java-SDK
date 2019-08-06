@@ -3,7 +3,7 @@
 
   <groupId>org.valuereporter</groupId>
   <artifactId>valuereporter-java-sdk</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.5</version>
   <packaging>jar</packaging>
 
   <name>valuereporter-java-sdk</name>
@@ -41,7 +41,7 @@
     <developerConnection>scm:git:ssh://git@github.com/cantara/Valuereporter-Java-SDK.git</developerConnection>
     <connection>scm:git:https://github.com/cantara/Valuereporter-Java-SDK.git</connection>
     <url>https://github.com/cantara/Valuereporter-Java-SDK</url>
-    <tag>HEAD</tag>
+    <tag>valuereporter-java-sdk-1.0.5</tag>
   </scm>
 
   <repositories>
@@ -186,21 +186,17 @@
                 </excludes>
               </artifactSet>
               <transformers>
-                <transformer
-                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                   <manifestEntries>
                     <Main-Class>net.whydah.identity.Main</Main-Class>
                   </manifestEntries>
                 </transformer>
-                <transformer
-                        implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 
-                <transformer
-                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                   <resource>META-INF/spring.handlers</resource>
                 </transformer>
-                <transformer
-                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                   <resource>META-INF/spring.schemas</resource>
                 </transformer>
               </transformers>
