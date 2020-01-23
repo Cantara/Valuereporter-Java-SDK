@@ -10,7 +10,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <slf4j.version>1.7.29</slf4j.version>
+    <slf4j.version>1.7.30</slf4j.version>
     <hystrix-core.version>1.4.12</hystrix-core.version>
     <rxjava_version_requested_by_hystrix-core>1.3.8</rxjava_version_requested_by_hystrix-core>
   </properties>
