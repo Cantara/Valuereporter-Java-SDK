@@ -5,9 +5,11 @@
   <artifactId>valuereporter-java-sdk</artifactId>
   <version>1.0.19-SNAPSHOT</version>
   <packaging>jar</packaging>
-
   <name>valuereporter-java-sdk</name>
+  <description>javaagent monitoring activities in your application. This information is forwarded to Valuereporter via http.</description>
+  <url>http://www.valuereporter.org</url>
 
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.7.30</slf4j.version>
@@ -15,9 +17,6 @@
     <rxjava_version_requested_by_hystrix-core>1.3.8</rxjava_version_requested_by_hystrix-core>
   </properties>
 
-  <description>javaagent monitoring activities in your application. This information is forwarded to Valuereporter via http.</description>
-
-  <url>http://www.valuereporter.org</url>
   <developers>
     <developer>
       <id>baardl</id>
@@ -44,29 +43,7 @@
     <tag>HEAD</tag>
   </scm>
 
-  <repositories>
-
-    <!-- Needed for parent  -->
-    <repository>
-      <id>cantara-releases</id>
-      <name>Cantara Release Repository</name>
-      <url>http://mvnrepo.cantara.no/content/repositories/releases/</url>
-    </repository>
-  </repositories>
-  <!--
-  <distributionManagement>
-    <repository>
-      <id>cantara-releases</id>
-      <name>cantara-releases</name>
-      <url>https://mvnrepo.cantara.no/content/repositories/releases</url>
-    </repository>
-    <snapshotRepository>
-      <id>cantara-snapshots</id>
-      <name>cantara-releases</name>
-      <url>https://mvnrepo.cantara.no/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
-  -->
+ 
 
   <dependencies>
     <!-- Use Hystrix when dealing with connections -->
@@ -207,4 +184,15 @@
 
     </plugins>
   </build>
+  
+  
+  <repositories>
+    <!-- Needed for parent  -->
+    <repository>
+      <id>cantara-releases</id>
+      <name>Cantara Release Repository</name>
+      <url>http://mvnrepo.cantara.no/content/repositories/releases/</url>
+    </repository>
+  </repositories>
+
 </project>
