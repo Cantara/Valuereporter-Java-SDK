@@ -1,6 +1,5 @@
 package org.valuereporter.activity;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.slf4j.Logger;
 import org.testng.annotations.BeforeMethod;
@@ -18,12 +17,10 @@ import static org.testng.Assert.assertNotNull;
 public class CommandSendActivitiesTest {
     private static final Logger log = getLogger(CommandSendActivitiesTest.class);
 
-    private ObjectMapper objectMapper;
     private CommandSendActivities sendActivities;
 
     @BeforeMethod
     public void setUp() throws Exception {
-        objectMapper = new ObjectMapper();
 
 
 
