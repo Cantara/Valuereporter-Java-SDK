@@ -1,0 +1,25 @@
+id: valuereporter-java-sdk
+name: Valuereporter Java SDK
+version: 1.11.3-SNAPSHOT
+description: |
+  Full Java SDK for integrating with the Valuereporter monitoring platform.
+  Combines client reporting, health-check registration, and metric query
+  capabilities into a single dependency for instrumented services.
+units:
+  - id: sdk
+    name: SDK
+    type: sdk
+    description: ValuReporterSDK — main entry point combining all SDK capabilities.
+    path: src/main/java/org/valuereporter
+  - id: reporting
+    name: Reporting
+    type: component
+    description: Activity and metric reporting — sends custom events to the Valuereporter service.
+  - id: health
+    name: Health
+    type: component
+    description: Health status registration and periodic heartbeat to signal service liveness.
+  - id: query
+    name: Query
+    type: component
+    description: Activity and metric querying API for reading back historical data.
