@@ -1,3 +1,17 @@
+kcp_version: "0.21"
+updated: "2026-06-20"
+language: en
+license: "Apache-2.0"
+indexing: private
+temporal:
+  valid_from: "2026-03-10"
+signing:
+  scheme: ed25519
+  scope: this-manifest
+  public_key: "MCowBQYDK2VwAyEAuipgusnqU9vjf3p2yPVLD/DmERT6tBbLOqEETdxAhMU="
+  signature: "https://raw.githubusercontent.com/Cantara/Valuereporter-java-SDK/master/knowledge.yaml.sig"
+not_for: []
+
 id: valuereporter-java-sdk
 name: Valuereporter Java SDK
 version: 1.11.3-SNAPSHOT
@@ -11,15 +25,27 @@ units:
     type: sdk
     description: ValuReporterSDK — main entry point combining all SDK capabilities.
     path: src/main/java/org/valuereporter
+      content_hash:
+        algorithm: sha256
+        value: ""
   - id: reporting
     name: Reporting
     type: component
     description: Activity and metric reporting — sends custom events to the Valuereporter service.
+      content_hash:
+        algorithm: sha256
+        value: ""
   - id: health
     name: Health
     type: component
     description: Health status registration and periodic heartbeat to signal service liveness.
+      content_hash:
+        algorithm: sha256
+        value: ""
   - id: query
     name: Query
     type: component
     description: Activity and metric querying API for reading back historical data.
+      content_hash:
+        algorithm: sha256
+        value: ""
