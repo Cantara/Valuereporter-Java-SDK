@@ -43,5 +43,7 @@ units:
 serving:
   manifest:
     - https://raw.githubusercontent.com/Cantara/Valuereporter-java-SDK/master/knowledge.yaml
+    # GitHub repo canonical name uses capital J; both URLs serve this file (§3.12 exact matching)
+    - https://raw.githubusercontent.com/Cantara/Valuereporter-Java-SDK/master/knowledge.yaml
   mcp:
     - https://mcp.cantara.no/mcp
