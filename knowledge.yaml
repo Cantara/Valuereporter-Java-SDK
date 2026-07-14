@@ -1,4 +1,4 @@
-kcp_version: "0.21"
+kcp_version: "0.26"
 updated: "2026-06-20"
 language: en
 license: "Apache-2.0"
@@ -25,27 +25,23 @@ units:
     type: sdk
     description: ValuReporterSDK — main entry point combining all SDK capabilities.
     path: src/main/java/org/valuereporter
-      content_hash:
-        algorithm: sha256
-        value: ""
   - id: reporting
     name: Reporting
     type: component
     description: Activity and metric reporting — sends custom events to the Valuereporter service.
-      content_hash:
-        algorithm: sha256
-        value: ""
   - id: health
     name: Health
     type: component
     description: Health status registration and periodic heartbeat to signal service liveness.
-      content_hash:
-        algorithm: sha256
-        value: ""
   - id: query
     name: Query
     type: component
     description: Activity and metric querying API for reading back historical data.
-      content_hash:
-        algorithm: sha256
-        value: ""
+
+# Serving Endpoint Binding (KCP SPEC v0.26 §3.12): authoritative manifest URL
+# and authorized MCP representative. Ignored by pre-0.26 verifiers.
+serving:
+  manifest:
+    - https://raw.githubusercontent.com/Cantara/Valuereporter-java-SDK/master/knowledge.yaml
+  mcp:
+    - https://mcp.cantara.no/mcp
